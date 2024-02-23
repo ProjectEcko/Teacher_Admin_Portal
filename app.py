@@ -8,7 +8,7 @@ app.secret_key="super secret key"
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'toor'
-app.config['MYSQL_PASSWORD'] = 'toor'
+app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'students'
  
  

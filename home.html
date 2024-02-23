@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+    {% include 'navbar.html' %} 
+    Welcome {{username}}
+    
+    <div class="container">
+
+        <div class="row">
+            <div class="col md-12">
+                <h2>Student List <button class="btn btn-success pull-right" type="button" onclick="window.location.href='{{url_for('newstudent') }}';">New Student</button></h2>
+                <!-- Old Button <button type="button"class="btn btn-success pull-right" data-toggle = "modal" data-target ="#mymodal">Add Student Data</button> -->
+                <table class="table table-striped">
+                    <tr>
+                        <th>Serial</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Action</th>
+                    </tr>
+
+                    {% for row in students %}
+                    <tr>
+                        <td>{{row.0}}</td>
+                        <td>{{row.1}}</td>
+                        <td>{{row.2}}</td>
+                        <td>{{row.3}}</td>
+                    
+                    <td> <!-- Buttons for Update and Delete-->
+                        <a href="/update/{{row.0}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.0}}">Edit</a>
+                        <a href="/deletestudent/{{row.0}}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete?')">Delete</a>
+                    </td>
+                    </tr>
+
+                    <div id="modaledit{{row.0}}" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+            
+                                    <h4 class="modal-title">Please Update Data</h4>
+            
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{url_for('update')}}" method="POST">
+            
+                                        <div class="form-group">
+                                            <label>Name:</Label>
+                                                <input type="hidden" name="id" value="{{row.0}}">
+                                                <input type="text" class="form-control" name="name" value={{row.1}}>
+                                            </div>
+            
+                                            <div class="form-group">
+                                                <label>Email:</label>
+                                                <input type="text" class="form-control" name="email" value="{{row.2}}">
+                                            </div>
+            
+                                            <div class="form-group">
+                                                <label>Phone:</label>
+                                                <input type="text" class="form-control" name="phone" value="{{row.3}}">
+                                            </div>
+            
+                                            <div class="form-group">
+                                                <button class="btn btn primary" type="submit">Update</button>
+                                            </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+            
+                                    <button type="button" class="btn btn default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+                </table>
+            
+            </div>
+        </div>
+        
+        <div id="mymodal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                        <h4 class="modal-title">Please Insert Data</h4>
+
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{url_for('insert')}}" method="POST">
+
+
+                            <div class="form-group">
+                                <label>Name:</Label>
+                                    <input type="text" class="form-control" name="name" required="1">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Email:</label>
+                                    <input type="text" class="form-control" name="email" required="1">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Phone:</label>
+                                    <input type="text" class="form-control" name="phone" required="1">
+                                </div>
+
+                                <div class="form-group">
+                                    <button class="btn btn primary" type="submit">Insert Data</button>
+                                </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <a href="{{url_for('logout')}}">
+        <button>Logout</button>
+    </a>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+    {% block content %}
+    {% include 'navbar.html' %}
+    <center>
+        <h1>Welcome to the admin page</h1>
+        <form> <!--Button for admin password to reveal user table-->
+            <div>
+                <input type="password" name="password" id="password" required placeholder="Admin Password">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+        <div class="container"> <!--container that displays user table from database-->
+            <div class="row">
+                <div class="col md-12">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Username</th>
+                            <th>Action</th>
+                        </tr>
+                        {% for row in user %}
+                        <tr>
+                            <td>{{row.1}}</td>                      
+                        <td>
+                            <a href="/userdelete/{{row.0}}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete?')">Delete</a>
+                        </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </center>
+    {% endblock %}
+</body>
+</html>

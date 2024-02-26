@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Student</title>
+</head>
+<center><body>
+    {% extends 'base.html' %}
+    {% block content %}
+    {% include 'navbar.html' %} 
+    Update Student Form
+    
+    <form>
+        
+        <div>
+            
+            <form action="{{url_for('updatestudent')}}" method="POST">
+            
+                <div class="form-group">
+                    <label>Name:</Label>
+                        <input type="hidden" name="id" >
+                        <input type="text" class="form-control" name="name" >
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="text" class="form-control" name="email" >
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone:</label>
+                        <input type="text" class="form-control" name="phone" >
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <button class="button-75" type="submit">Update</button>
+                    </div>
+            </form>
+            
+        </div>
+       
+    </form>
+    
+    
+    {% endblock %}
+</body></center>
+</html>
